@@ -43,17 +43,20 @@ def save_html_to_json(html_dir, json_dir):
 
 
 def question_json_to_gift(q_json):
-    q_gift = q_json["title"]
+    q_gift = str(q_json["id"]) + ". "
+    q_gift += q_json["title"]
     if "img" in q_json:
-        q_gift += "\n$$$"
+        q_gift += "\n&&&"
         q_gift += os.path.join("img", q_json["img"])
-        q_gift += "$$$\n"
+        q_gift += "&&&\n"
     q_gift += "{\n"
-    for answer in q_json["answers"]:
+    for i in range(len(q_json["answers"])):
+        answer = q_json["answers"][i]
         if answer[1]:
             q_gift += "="
         else:
             q_gift += "~"
+        q_gift += str(i+1) + ". "
         q_gift += answer[0]
         q_gift += '\n'
     q_gift += "}\n"
@@ -69,7 +72,7 @@ def save_json_to_gift(json_dir, gift_dir):
             block = json.load(file)
 
         print("Wrapping a gift...")
-        gift_content = f"1C_{block['id']}#{block['name']}###\n"
+        gift_content = f"1C_{block['id']}#{block['id']}. {block['name']}###\n"
         for q in block['questions']:
             gift_content += question_json_to_gift(q)
 
@@ -85,5 +88,5 @@ if __name__ == '__main__':
     json_dir_path = os.path.join("src", "json")
     gift_dir_path = os.path.join("src", "gift")
 
-    save_html_to_json(html_dir_path, json_dir_path)
+    # save_html_to_json(html_dir_path, json_dir_path)
     save_json_to_gift(json_dir_path, gift_dir_path)
