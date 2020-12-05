@@ -4,8 +4,9 @@ import os
 
 
 class Question:
-    def __init__(self, tag):
+    def __init__(self, tag, auto_download=True):
         self.tag = tag
+        self.auto_download = auto_download
         self.id = self.get_id()
         self.title_tag, self.title = self.get_title()
         self.img_name = self.get_img()
@@ -28,7 +29,10 @@ class Question:
         if img_tag is None:
             return
         img_url = img_tag['src']
-        img_name = self.download_img(img_url)
+        if self.auto_download:
+            img_name = self.download_img(img_url)
+        else:
+            img_name = img_url.split('/')[-1]
         return img_name
 
     def download_img(self, img_url):

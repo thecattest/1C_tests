@@ -90,3 +90,20 @@ if __name__ == '__main__':
 
     # save_html_to_json(html_dir_path, json_dir_path)
     save_json_to_gift(json_dir_path, gift_dir_path)
+
+    # html_name = "10.html"
+    # block_id = int(html_name.split('.')[0])
+    # block_name = block_titles[block_id]
+    #
+    # html_path = os.path.join(html_dir_path, html_name)
+    # print(f"Loading {html_path}...")
+    # with open(html_path) as html_file:
+    #     html = html_file.read()
+    #
+    # block = elements.Block(html, block_id, block_name)
+    # print(block)
+    #
+    # # with open("src/json/10.json") as file:
+    # #     block = json.load(file)
+    # #
+    # # print(block['questions'][109])
